@@ -1,0 +1,42 @@
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$bg-color: #121212;
+$bg-opacity: 0.8;
+$color-primary: rgb(255, 255, 255);
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+  }
+  
+  .table thead th {
+	text-align: left;
+	padding: 10px;
+	border-bottom: 2px solid #ccc;
+  }
+  
+  .table tbody td {
+	text-align: left;
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+  }
+  
+  .table tbody td img {
+	width: 50px;
+	height: 50px;
+	object-fit: contain;
+	border-radius: 5px;
+  }
+  tbody tr:hover {
+	background-color: $secondary-color;
+}
+
+td[data-label]:before {
+	float: left;
+	font-weight: bold;
+	padding-right: 1rem;
+}
+  

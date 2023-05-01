@@ -1,0 +1,103 @@
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$bg-color: #121212;
+$bg-opacity: 0.8;
+
+body {
+  height: 100%;
+  overflow-y: auto;
+  
+}
+
+body {
+  background-color: $bg-color;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  overflow: auto;
+//   overflow-x: hidden; /* Hide horizontal scrollbar */
+//   overflow-y: scroll; /* Add vertical scrollbar */
+
+  .container {
+	border: 2px solid $primary-color;
+	border-radius: 10px;
+	padding: 20px;
+	margin: 0 auto;
+	margin-top: 50px;
+	max-width: 600px;
+	// align-items: center;
+	display: flex;
+
+	.card {
+		background-color: rgba($bg-color, $bg-opacity);
+		color: white;
+		border: none;
+		// align-items: center;
+		justify-content: center;
+		text-align: center;
+	  
+		.card-header {
+		  border-bottom: none;
+		//   text-align: center;
+		}
+		
+		.form-group label {
+		  text-align: start;
+		  display: flex;
+		  flex-direction: column;
+		  font-weight: bold;
+		  color: $secondary-color;
+		  margin: auto;
+		  // width: 30vw;
+		  border-radius: 0 0 10px 10px;
+		}
+		input {
+		  border-color: $primary-color;
+		  border-radius: 10px;
+		  padding: 0.5vw 4vw;
+		  outline: none;
+		  margin: auto;
+		  align-items: start;
+		  justify-items: start;
+		  text-align: start;
+		  margin-bottom: 10px;
+		}
+		.btn-primary {
+		  background-color: $primary-color;
+		  border-color: $primary-color;
+		  display: flex;
+		  align-items: center;
+		  border-radius: 10px;
+		  justify-content: center;
+		  margin: auto;
+		  padding: 1vw 1vw;
+		  outline: none;
+		  margin-top: 10px;
+		  margin-bottom: auto;
+		}
+		
+	  .btn-primary:hover {
+		  background-color: $primary-color;
+		   border-color: $primary-color;
+		  display: flex;
+		  justify-content: start;
+		  align-items: start;
+		  border-radius: 10px;
+		//   margin: auto;
+		//   padding: 1vw 1vw;
+		//   outline: none;
+		//   margin-top: 10px;
+		//   margin-bottom: auto;
+	  }  
+	}
+  }
+}
+
+// .parent-element {
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+// 	display: flex;
+// }
