@@ -1,5 +1,4 @@
 import React from 'react';
-import '../components/dashboard.scss';
 import { BsGraphUp, BsClock, BsClipboardData, BsCart } from 'react-icons/bs';
 
 const DashboardContainers = () => {

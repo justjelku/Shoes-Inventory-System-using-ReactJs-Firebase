@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../components/inventory.scss';
 import { v4 as uuidv4 } from 'uuid';
 
 

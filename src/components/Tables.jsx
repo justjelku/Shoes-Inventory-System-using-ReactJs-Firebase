@@ -1,5 +1,4 @@
 import React from 'react';
-import '../components/containerstables.scss';
 
 const ContainerTables = () => {
 	return ( 

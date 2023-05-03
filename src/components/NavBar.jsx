@@ -10,7 +10,7 @@ function Navbar() {
           <li><Link to="/dashboard" class="active">Dashboard</Link></li>
           <li><Link to="/inventory" className="link">Inventory</Link></li>
           <li><Link to="/sales" className="link">Sales</Link></li>
-          <li><Link to="/profile" className="link">Settings</Link></li>
+          <li><Link to="/account" className="link">Profile</Link></li>
         </ul>
       </nav>
     </div>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './navbar';
-import ContainerTables from './containertables';
-import DashboardContainers from './dashboardcontainers';
+import Navbar from './NavBar';
+import ContainerTables from './Tables';
+import DashboardContainers from './Dashboard';
 
-const Dashboard
+const Home
   = () => {
     return (
       <div>
@@ -15,5 +15,5 @@ const Dashboard
     );
   }
 
-export default Dashboard;
+export default Home;
 

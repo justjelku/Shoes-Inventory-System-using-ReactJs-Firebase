@@ -1,19 +1,18 @@
 import React, { useState,useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import firebase from 'firebase/compat/app'; // import firebase
-import { auth, adminUsersRef, basicUsersRef } from './firebase.js';
+import { auth, adminUsersRef, basicUsersRef } from '../firebase/Firebase.js';
 import 'firebase/compat/firestore';
-// import { useNavigate } from 'react-router';
+import AlertDialog from './Alertdiaglog.jsx';
 
 
-const Login = () => {
+const AdminLogin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const [showMessage, setShowMessage] = useState(false);
-  const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertTitle, setAlertTitle] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
 
   const handleSubmit = async () => {
     try {
@@ -31,40 +30,34 @@ const Login = () => {
 
       if (userDoc.exists && userDoc.get("enabled") === true) {
         console.log('Login successful');
-        _showMessage("Logged In Successful!", true);
-        navigate('/dashboard', { replace: true });
+        setAlertMessage("Logged In Successful!", true);
+        navigate('/', { replace: true });
       } else {
-        _showMessage("User account is disabled.", false);
+        setAlertMessage("User account is disabled.", false);
         await auth.signOut();
       }
     } catch (e) {
-      if (e.code === "auth/user-not-found") {
-        _showMessage("No user found for that email.", false);
-      } else if (e.code === "auth/wrong-password") {
-        _showMessage("Wrong password provided for that user.", false);
+      if (e.code === 'auth/user-not-found') {
+        setShowAlert(true);
+        setAlertTitle('Invalid Email or Password');
+        setAlertMessage('The email or password you entered is incorrect. Please try again.');
+      } else if (e.code === 'auth/wrong-password') {
+        setShowAlert(true);
+        setAlertTitle('Invalid Email or Password');
+        setAlertMessage('The email or password you entered is incorrect. Please try again.');
       } else {
-        _showMessage(`Error: ${e.message}`, false);
+        setShowAlert(true);
+        setAlertTitle('Error');
+        setAlertMessage(`An error occurred: ${e.message}`);
       }
     }
-  };
-
-  const _showMessage = (message, success) => {
-    setMessage(message);
-    setMessageType(success ? "success" : "error");
-    setShowMessage(true);
-
-    setTimeout(() => {
-      setShowMessage(false);
-      setMessage('');
-      setMessageType('');
-    }, 3000);
   };
 
   useEffect(() => {
     // Initialize Firebase SDK objects here
     const firebaseAuth = firebase.auth();
     const firestore = firebase.firestore();
-  
+
     // Set up Firebase Auth state change listener
     const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
@@ -75,7 +68,7 @@ const Login = () => {
         console.log("User is signed out");
       }
     });
-  
+
     // Unsubscribe from Firebase Auth state change listener on component unmount
     return () => {
       unsubscribe();
@@ -89,7 +82,8 @@ const Login = () => {
         <div className="col-md-6">
           <div className="card">
             <div className="card-header bg-primary text-light">
-              <h3>Login</h3>
+              <h3>Admin Portal</h3>
+			  <p className="bg-primary text-light"><Link to="/user">User Portal</Link></p>
             </div>
             <div className="card-body d-flex flex-column justify-content-center align-items-center">
               <form className="w-100" onSubmit={(event) => { event.preventDefault(); handleSubmit(); }}>
@@ -111,10 +105,17 @@ const Login = () => {
                     <input type="password" className="form-control" id="password" value={password} onChange={event => setPassword(event.target.value)} />
                   </div>
                 </div>
-                {error && <div className="alert alert-danger w-75">{error}</div>}
                 <button type="submit" className="btn btn-primary w-75"><span className="text-light">Login</span></button>
-                <p className="mt-3">Don't have an account? <Link to="/register">Register here</Link></p>
               </form>
+			  {/* render the alert dialog if showAlert is true */}
+                {showAlert && (
+                  <AlertDialog
+                    isOpen={showAlert}
+                    title={alertTitle}
+                    message={alertMessage}
+                    onClose={() => setShowAlert(false)}
+                  />
+                )}
             </div>
           </div>
         </div>
@@ -123,4 +124,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

@@ -1,26 +1,45 @@
-// import logo from './logo.svg';
-import Login from './pages/login';
-// import './App.css';
-import Register from './pages/register';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import './components/style.scss';
+import Login from './components/Login';
+import Register from './components/Register';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import React from 'react';
-import Dashboard from './pages/dashboard';
-import './components/navbar.scss';
-import Inventory from './pages/inventory';
+import './App.scss';
+import AdminLogin from './components/AdminLogin';
+import { AuthProvider } from './context/AuthContext';
+// import { UserContextProvider } from './context/UserContextProvider';
+import Profile from './components/Profile';
+import ProtectedRoute from './components/ProtectedRoute';
+import Home from './components/Home';
 
-function App() {
+export default function App() {
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/inventory" element={<Inventory />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/user" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route
+            exact
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
-
-export default App;
 
