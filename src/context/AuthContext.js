@@ -38,6 +38,31 @@ export const AuthProvider = ({ children }) => {
 		}
 	}
 
+	const signInAdmin = async (email, password) => {
+		try {
+			const userCredential = await signInWithEmailAndPassword(auth, email, password);
+			const userDoc = await firebase.firestore()
+				.collection("users")
+				.doc("qIglLalZbFgIOnO0r3Zu")
+				.collection("admin_users")
+				.doc(userCredential.user.uid)
+				.get();
+
+			// Check if the user exists in the sub-collection
+			if (!userDoc.exists) {
+				console.log("User does not exist in the sub-collection");
+				return null;
+			}
+
+			// Set the user state to the authenticated user
+			setUser(userCredential.user);
+			return userCredential.user;
+		} catch (error) {
+			console.error(error);
+			return null;
+		}
+	}
+
 
 	const createUser = async (role, status, firstName, lastName, username, email, password) => {
 		try {
@@ -88,7 +113,7 @@ export const AuthProvider = ({ children }) => {
 	}, [auth]);
 
 	return (
-		<AuthContext.Provider value={{ createUser, user, logout, signIn }}>
+		<AuthContext.Provider value={{ createUser, user, logout, signIn, signInAdmin }}>
 			{children}
 		</AuthContext.Provider>
 	)

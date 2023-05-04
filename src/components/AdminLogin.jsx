@@ -1,80 +1,70 @@
 import React, { useState,useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import firebase from 'firebase/compat/app'; // import firebase
-import { auth, adminUsersRef, basicUsersRef } from '../firebase/Firebase.js';
+import { auth } from '../firebase/Firebase.js';
 import 'firebase/compat/firestore';
-import AlertDialog from './Alertdiaglog.jsx';
+import { UserAuth } from '../context/AuthContext.js';
 
 
 const AdminLogin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showAlert, setShowAlert] = useState(false);
-  const [alertTitle, setAlertTitle] = useState('');
-  const [alertMessage, setAlertMessage] = useState('');
+  const { signInAdmin } = UserAuth();
+  const [error, setError] = useState(null);
 
-  const handleSubmit = async () => {
-    try {
-      const userCredential = await auth.signInWithEmailAndPassword(
-        email,
-        password
-      );
+  // const handleSubmit = async () => {
+  //   try {
+  //     const userCredential = await auth.signInWithEmailAndPassword(
+  //       email,
+  //       password
+  //     );
 
-      const userDoc = await firebase.firestore() // use firebase.firestore()
-        .collection("users")
-        .doc("qIglLalZbFgIOnO0r3Zu")
-        .collection("admin_users")
-        .doc(userCredential.user.uid)
-        .get();
+  //     const userDoc = await firebase.firestore() // use firebase.firestore()
+  //       .collection("users")
+  //       .doc("qIglLalZbFgIOnO0r3Zu")
+  //       .collection("admin_users")
+  //       .doc(userCredential.user.uid)
+  //       .get();
 
-      if (userDoc.exists && userDoc.get("enabled") === true) {
-        console.log('Login successful');
-        setAlertMessage("Logged In Successful!", true);
-        navigate('/', { replace: true });
-      } else {
-        setAlertMessage("User account is disabled.", false);
-        await auth.signOut();
-      }
-    } catch (e) {
-      if (e.code === 'auth/user-not-found') {
-        setShowAlert(true);
-        setAlertTitle('Invalid Email or Password');
-        setAlertMessage('The email or password you entered is incorrect. Please try again.');
-      } else if (e.code === 'auth/wrong-password') {
-        setShowAlert(true);
-        setAlertTitle('Invalid Email or Password');
-        setAlertMessage('The email or password you entered is incorrect. Please try again.');
-      } else {
-        setShowAlert(true);
-        setAlertTitle('Error');
-        setAlertMessage(`An error occurred: ${e.message}`);
-      }
+  //     if (userDoc.exists && userDoc.get("enabled") === true) {
+  //       console.log('Login successful');
+  //       setAlertMessage("Logged In Successful!", true);
+  //       navigate('/', { replace: true });
+  //     } else {
+  //       setAlertMessage("User account is disabled.", false);
+  //       await auth.signOut();
+  //     }
+  //   } catch (e) {
+  //     if (e.code === 'auth/user-not-found') {
+  //       setShowAlert(true);
+  //       setAlertTitle('Invalid Email or Password');
+  //       setAlertMessage('The email or password you entered is incorrect. Please try again.');
+  //     } else if (e.code === 'auth/wrong-password') {
+  //       setShowAlert(true);
+  //       setAlertTitle('Invalid Email or Password');
+  //       setAlertMessage('The email or password you entered is incorrect. Please try again.');
+  //     } else {
+  //       setShowAlert(true);
+  //       setAlertTitle('Error');
+  //       setAlertMessage(`An error occurred: ${e.message}`);
+  //     }
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    try{
+      await signInAdmin(email, password);
+      navigate('/')
+    } catch(e){
+      setError(e.message);
+      console.log(e.message); 
     }
-  };
+  }
 
-  useEffect(() => {
-    // Initialize Firebase SDK objects here
-    const firebaseAuth = firebase.auth();
-    const firestore = firebase.firestore();
-
-    // Set up Firebase Auth state change listener
-    const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in
-        console.log("User is signed in");
-      } else {
-        // User is signed out
-        console.log("User is signed out");
-      }
-    });
-
-    // Unsubscribe from Firebase Auth state change listener on component unmount
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-  
 
   return (
     <div className="container mt-5">
@@ -86,7 +76,7 @@ const AdminLogin = () => {
 			  <p className="bg-primary text-light"><Link to="/user">User Portal</Link></p>
             </div>
             <div className="card-body d-flex flex-column justify-content-center align-items-center">
-              <form className="w-100" onSubmit={(event) => { event.preventDefault(); handleSubmit(); }}>
+              <form className="w-100" onSubmit={handleSubmit}>
                 <div className="form-group w-75">
                   <label htmlFor="email">Email</label>
                   <div className="input-group">
@@ -106,16 +96,8 @@ const AdminLogin = () => {
                   </div>
                 </div>
                 <button type="submit" className="btn btn-primary w-75"><span className="text-light">Login</span></button>
+                {error && <p className="text-danger mt-3">{error}</p>}
               </form>
-			  {/* render the alert dialog if showAlert is true */}
-                {showAlert && (
-                  <AlertDialog
-                    isOpen={showAlert}
-                    title={alertTitle}
-                    message={alertMessage}
-                    onClose={() => setShowAlert(false)}
-                  />
-                )}
             </div>
           </div>
         </div>

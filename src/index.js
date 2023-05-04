@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { UserContextProvider } from './context/UserContextProvider';
 import App from './App';
 import ProtectedRoute from './components/ProtectedRoute';
 

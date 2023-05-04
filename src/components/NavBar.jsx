@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AddProduct from './Addproduct';
 
 function Navbar() {
   return (
@@ -11,6 +12,7 @@ function Navbar() {
           <li><Link to="/inventory" className="link">Inventory</Link></li>
           <li><Link to="/sales" className="link">Sales</Link></li>
           <li><Link to="/account" className="link">Profile</Link></li>
+          <AddProduct />
         </ul>
       </nav>
     </div>

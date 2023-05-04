@@ -17,9 +17,6 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const [showMessage, setShowMessage] = useState(false);
-  // const [message, setMessage] = useState('');
-  // const [messageType, setMessageType] = useState('');
   const { createUser } = UserAuth();
 
   // const signUp = async (e) => { 
@@ -92,53 +89,6 @@ const Register = () => {
       console.log(e.message); 
     }
   }
-
-  // const _showMessage = (message, success) => {
-  //   setMessage(message);
-  //   setMessageType(success ? "success" : "error");
-  //   setShowMessage(true);
-
-  //   setTimeout(() => {
-  //     setShowMessage(false);
-  //     setMessage('');
-  //     setMessageType('');
-  //   }, 3000);
-  // };
-
-  // useEffect(() => {
-  //   // Initialize Firebase SDK objects here
-  //   const firebaseAuth = firebase.auth();
-  //   const firestore = firebase.firestore();
-
-  //   // Set up Firebase Auth state change listener
-  //   const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       // User is signed in
-  //       console.log("User is signed in");
-  //     } else {
-  //       // User is signed out
-  //       console.log("User is signed out");
-  //     }
-  //   });
-
-  //   // Unsubscribe from Firebase Auth state change listener on component unmount
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
-
-  // const validatePassword = () => {
-  //   let isValid = true
-  //   if (password !== '' && confirmPassword !== '') {
-  //     if (password !== confirmPassword) {
-  //       isValid = false
-  //       setError('Passwords does not match')
-  //     }
-  //   }
-  //   return isValid
-  // }
-
-
 
   return (
     <div className="container mt-5">

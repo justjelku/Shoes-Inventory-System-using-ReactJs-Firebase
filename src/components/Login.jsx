@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'firebase/compat/firestore';
-import AlertDialog from './Alertdiaglog.jsx';
 import { UserAuth } from '../context/AuthContext.js';
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [showAlert, setShowAlert] = useState(false);
-  // const [alertTitle, setAlertTitle] = useState('');
-  // const [alertMessage, setAlertMessage] = useState('');
   const { signIn } = UserAuth();
   const [error, setError] = useState(null);
 
