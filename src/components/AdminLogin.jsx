@@ -1,16 +1,15 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import firebase from 'firebase/compat/app'; // import firebase
-import { auth } from '../firebase/Firebase.js';
+import { auth } from '../firebase/index.js';
 import 'firebase/compat/firestore';
-import { UserAuth } from '../context/AuthContext.js';
-
+import { AdminUserAuth } from '../context/AdminAuthContext.js';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signInAdmin } = UserAuth();
+  const { signInAdmin } = AdminUserAuth();
   const [error, setError] = useState(null);
 
   // const handleSubmit = async () => {
@@ -32,22 +31,16 @@ const AdminLogin = () => {
   //       setAlertMessage("Logged In Successful!", true);
   //       navigate('/', { replace: true });
   //     } else {
-  //       setAlertMessage("User account is disabled.", false);
+  //       setError("User account is disabled.");
   //       await auth.signOut();
   //     }
   //   } catch (e) {
   //     if (e.code === 'auth/user-not-found') {
-  //       setShowAlert(true);
-  //       setAlertTitle('Invalid Email or Password');
-  //       setAlertMessage('The email or password you entered is incorrect. Please try again.');
+  //       setError('The email or password you entered is incorrect. Please try again.');
   //     } else if (e.code === 'auth/wrong-password') {
-  //       setShowAlert(true);
-  //       setAlertTitle('Invalid Email or Password');
-  //       setAlertMessage('The email or password you entered is incorrect. Please try again.');
+  //       setError('The email or password you entered is incorrect. Please try again.');
   //     } else {
-  //       setShowAlert(true);
-  //       setAlertTitle('Error');
-  //       setAlertMessage(`An error occurred: ${e.message}`);
+  //       setError('Error');
   //     }
   //   }
   // };
@@ -58,7 +51,7 @@ const AdminLogin = () => {
 
     try{
       await signInAdmin(email, password);
-      navigate('/')
+      navigate('/adminaccount')
     } catch(e){
       setError(e.message);
       console.log(e.message); 

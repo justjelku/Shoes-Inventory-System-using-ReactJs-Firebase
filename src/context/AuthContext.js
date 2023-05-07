@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useMemo } from '
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import { auth } from '../firebase/Firebase.js';
+import { auth } from '../firebase/index.js';
 import { Route, Navigate, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 
@@ -12,6 +12,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState({});
+	// const [loading, setLoading] = useState(true);
 
 	const signIn = async (email, password) => {
 		try {
@@ -23,6 +24,14 @@ export const AuthProvider = ({ children }) => {
 				.doc(userCredential.user.uid)
 				.get();
 
+			if (userDoc.exists) {
+				setUser({
+					uid: user.uid,
+					email: user.email,
+					role: 'basic'
+				});
+				return null;
+			}
 			// Check if the user exists in the sub-collection
 			if (!userDoc.exists) {
 				console.log("User does not exist in the sub-collection");
@@ -37,32 +46,6 @@ export const AuthProvider = ({ children }) => {
 			return null;
 		}
 	}
-
-	const signInAdmin = async (email, password) => {
-		try {
-			const userCredential = await signInWithEmailAndPassword(auth, email, password);
-			const userDoc = await firebase.firestore()
-				.collection("users")
-				.doc("qIglLalZbFgIOnO0r3Zu")
-				.collection("admin_users")
-				.doc(userCredential.user.uid)
-				.get();
-
-			// Check if the user exists in the sub-collection
-			if (!userDoc.exists) {
-				console.log("User does not exist in the sub-collection");
-				return null;
-			}
-
-			// Set the user state to the authenticated user
-			setUser(userCredential.user);
-			return userCredential.user;
-		} catch (error) {
-			console.error(error);
-			return null;
-		}
-	}
-
 
 	const createUser = async (role, status, firstName, lastName, username, email, password) => {
 		try {
@@ -77,7 +60,7 @@ export const AuthProvider = ({ children }) => {
 				.doc(uid)
 				.set({
 					uid: uid,
-					role: 'Basic',
+					role: 'basic',
 					status: true,
 					firstName: firstName,
 					lastName: lastName,
@@ -93,7 +76,6 @@ export const AuthProvider = ({ children }) => {
 		}
 	}
 
-
 	const logout = () => {
 		return signOut(auth)
 	}
@@ -103,9 +85,9 @@ export const AuthProvider = ({ children }) => {
 		const firebaseAuth = firebase.auth();
 		const firestore = firebase.firestore();
 
-		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-			console.log(currentUser);
-			setUser(currentUser);
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			console.log(user);
+			setUser(user);
 		});
 		return () => {
 			unsubscribe();
@@ -113,7 +95,7 @@ export const AuthProvider = ({ children }) => {
 	}, [auth]);
 
 	return (
-		<AuthContext.Provider value={{ createUser, user, logout, signIn, signInAdmin }}>
+		<AuthContext.Provider value={{ createUser, user, logout, signIn }}>
 			{children}
 		</AuthContext.Provider>
 	)

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/compat/app'; // import firebase
 import { Link, useNavigate } from 'react-router-dom';
 import 'firebase/compat/firestore';
-import { auth } from '../firebase/Firebase.js';
+import { auth } from '../firebase/index.js';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { UserAuth } from '../context/AuthContext.js';
 
@@ -154,7 +154,7 @@ const Register = () => {
                     <input type="password" className="form-control" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                   </div>
                 </div>
-                <button type="submit" className="btn btn-primary w-75" ><span className="text-light">Login</span></button>
+                <button type="submit" className="btn btn-primary w-75" ><span className="text-light">Register</span></button>
                 {error && <p className="text-danger mt-3">{error}</p>}
                 <p className="mt-3 text-center">Already have an account? <Link to="/">Login here</Link></p>
               </form>

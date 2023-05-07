@@ -250,7 +250,7 @@ body {
   width: 100%;
   .cancel {
 	position: absolute;
-	top: 20px;
+	top: 80px;
 	right: 10px;
 	cursor: pointer;
 	svg {
@@ -259,10 +259,11 @@ body {
   }
   
   
-  .productTitle {
-    margin-bottom: 15px;
+  .heading {
+	margin-top: 50px;
     
     h3 {
+		position: relative;
       color: white;
       font-size: 20px;
       font-weight: 500;
@@ -290,6 +291,7 @@ body {
   .productSize,
   .productPrice,
   .productDetails,
+  .productQuantity,
   .productBranch {
     margin-bottom: 15px;
     
@@ -361,34 +363,34 @@ body {
   .buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 50px;
     
     .cancel {
       cursor: pointer;
       
       svg {
-        fill: #888;
+        fill: #ffffff;
         transition: fill 0.2s;
         
         &:hover {
-          fill: #555;
+          fill: #ffffff;
         }
       }
     }
     
     .confirm {
       button {
-        background-color: #4caf50;
+        background-color: #ffffff;
         border: none;
         border-radius: 4px;
         box-shadow: none;
-        color: #fff;
+        color: #ffffff;
         cursor: pointer;
         font-size: 16px;
         padding: 10px;
         
         &:hover {
-          background-color: #3e8e41;
+          background-color: #ffffff;
         }
       }
     }
@@ -588,41 +590,55 @@ body {
 	width: 100%;
 	border-collapse: collapse;
 	margin: 0 auto;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	align-items: left;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	text-align: center;
+	// align-items: left;
+	justify-self: center;
 
 	.table thead th {
 		text-align: center;
-		align-items: center;
+		align-items: right;
 		padding: 10px;
-		border-bottom: 2px solid #ccc;
+		// border-bottom: 2px solid #ef0000;
 		text-align: right; // added
+		margin-bottom: 50px;
 	}
 
 	.table tbody td {
-		text-align: right;
-		padding: 10px;
-		border-bottom: 1px solid #ccc;
+		margin-top: 100px;
+		text-align: center;
+		align-items: center;
+		padding: 100px;
+		border-bottom: 1px solid #ffffff;
 	}
 
 	.table tbody td img {
-		width: 50px;
-		height: 50px;
+		margin-top: 10%;
+		align-items: center;
+		width: 5px;
+		height: 5px;
+		text-align: center;
 		object-fit: contain;
 		border-radius: 5px;
 	}
 
 	tbody tr:hover {
+		align-items: center;
+		justify-content: center;
 		background-color: rgb(72, 72, 72);
 		opacity: 0.5;
 		cursor: pointer;
+		text-align: center;
 		color: lighten(rgb(36, 150, 144), 10%);
 	}
 
 	td[data-label]:before {
+		align-items: center;
+		justify-content: center;
 		float: center;
+		text-align: center;
 		font-weight: bold;
-		padding-right: 1rem;
+		// padding-right: 1rem;
 	}
 }

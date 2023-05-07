@@ -1,6 +1,6 @@
-import React from 'react'
-import { Button } from 'react-bootstrap';
-import { Bell, CalendarDay, Clock, Palette, X } from 'react-bootstrap-icons'
+import { Button } from 'react-bootstrap'
+import { X } from 'react-bootstrap-icons'
+import React, { useContext, useEffect, useState } from 'react'
 
 function ProductForm({
 	handleSubmit,
@@ -11,17 +11,25 @@ function ProductForm({
 	productDetails, setproductDetails,
 	productBranch, setproductBranch,
 	productImage, setproductImage,
+	productQuantity, setproductQuantity,
 	generateBarcodeButton,
 	showButtons = false,
 	setShowModal = false
 }) {
+	const handleImageChange = (event) => {
+		const file = event.target?.files[0];
+		setproductImage(file);
+	  };
+
 	return (
 		<form onSubmit={handleSubmit} className='ProductForm'>
-			<div className="productTitle">
+			<div className="heading">
 				{
 					heading &&
 					<h3>{heading}</h3>
 				}
+			</div>
+			<div className="productSize">
 				<input
 					type='text'
 					value={productTitle}
@@ -36,6 +44,15 @@ function ProductForm({
 					value={productSize}
 					onChange={e => setproductSize(e.target.value)}
 					placeholder='Size'
+					autoFocus
+				/>
+			</div>
+			<div className='productQuantity'>
+				<input
+					type='number'
+					value={productQuantity}
+					onChange={e => setproductQuantity(e.target.value)}
+					placeholder='Quantity'
 					autoFocus
 				/>
 			</div>
@@ -69,9 +86,9 @@ function ProductForm({
 			<div className="productImage">
 				<input
 					type='file'
-					value={productImage}
+					// value={productImage}
 					accept='image/*'
-					onChange={e => setproductImage(e.target.value)}
+					onChange={handleImageChange}
 				/>
 			</div>
 			<div className="generateBarcode" onClick={() => generateBarcodeButton(false)}>
@@ -81,7 +98,7 @@ function ProductForm({
 				showButtons &&
 				<div>
 					<div className="cancel" onClick={() => setShowModal(false)}>
-						<X size='40' />
+						<X size='20' />
 					</div>
 					<div className="confirm">
 						<button>Submit</button>
