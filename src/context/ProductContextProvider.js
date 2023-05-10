@@ -1,10 +1,11 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import { useProducts, updateProduct, deleteProduct } from '../hooks';
 
 const ProductContext = createContext();
 
 export function ProductContextProvider({ children }) {
   const products = useProducts();
+  const [selectedProduct, setSelectedProduct] = useState(undefined)
 
   return (
     <ProductContext.Provider  
@@ -12,6 +13,8 @@ export function ProductContextProvider({ children }) {
         products,
         updateProduct,
         deleteProduct,
+        selectedProduct,
+        setSelectedProduct
       }}
     >
       {children}
@@ -19,4 +22,4 @@ export function ProductContextProvider({ children }) {
   );
 }
 
-export { ProductContext };
+export { ProductContext};

@@ -111,7 +111,7 @@ const DashboardContainers = () => {
           </div>
           <div className="dashboard__text">
             <h3 className="dashboard__title">Pending Order</h3>
-            <p className="dashboard__value">5</p>
+            <p className="dashboard__value">0</p>
           </div>
         </div>
       </div>
@@ -135,7 +135,7 @@ const DashboardContainers = () => {
           </div>
           <div className="dashboard__text">
             <h3 className="dashboard__title">Total Order</h3>
-            <p className="dashboard__value">25</p>
+            <p className="dashboard__value">0</p>
           </div>
         </div>
       </div>

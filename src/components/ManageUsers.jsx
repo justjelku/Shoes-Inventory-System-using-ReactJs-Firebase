@@ -1,8 +1,11 @@
 import React from 'react'
+import { UserTables } from './UserTable'
 
 function ManageUsers(){
   return (
-	<div>ManageUsers</div>
+	<div>ManageUsers
+    <UserTables/>
+  </div>
   )
 }
 

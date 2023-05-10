@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Modal } from '../components/Modal'
 import ProductForm from "./ProductForm";
 import { db } from '../firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { storage } from '../firebase';
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
@@ -14,14 +14,17 @@ function AddProduct() {
 
 	// STATE
 	const [productId, setProductId] = useState('');
-	const [userId, setUserId] = useState(null);
+	const [userId, setUserId] = useState('');
+	const [barcodeId, setBarcodeId] = useState('');
+	const [qrcodeUrl, setQrcodeUrl] = useState('');
+	const [barcodeUrl, setBarcodeUrl] = useState('')
 	const [showModal, setShowModal] = useState(false)
 	const [productTitle, setproductTitle] = useState('')
-	const [productSize, setproductSize] = useState('')
-	const [productPrice, setproductPrice] = useState('')
+	const [productSize, setproductSize] = useState(0)
+	const [productPrice, setproductPrice] = useState(0)
 	const [productDetails, setproductDetails] = useState('')
-	const [productQuantity, setProductQuantity] = useState('')
-	const [productBranch, setproductBranch] = useState('')
+	const [productQuantity, setProductQuantity] = useState(0)
+	const [branch, setBranch] = useState('')
 	const [productImage, setproductImage] = useState('')
 	const [progresspercent, setProgresspercent] = useState(0);
 
@@ -54,65 +57,69 @@ function AddProduct() {
 		fetchProductId();
 	  }, [userId]);
 	  
-
 	  function handleSubmit(e) {
 		e.preventDefault();
 		if (!productImage) {
-			alert("Please select an image for your product.");
-			return;
+		  alert("Please select an image for your product.");
+		  return;
 		}
-	
+	  
 		const storageRef = ref(storage, `products/productImage/${productImage.name}`);
 		const uploadTask = uploadBytesResumable(storageRef, productImage);
-	
+	  
 		uploadTask.on(
-			"state_changed",
-			(snapshot) => {
-				const progress = Math.round(
-					(snapshot.bytesTransferred / snapshot.totalBytes) * 100
-				);
-				setProgresspercent(progress);
-			},
-			(error) => {
-				alert(error);
-			},
-			() => {
-				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-					addDoc(
-						collection(
-							db,
-							"users",
-							"qIglLalZbFgIOnO0r3Zu",
-							"basic_users",
-							userId,
-							"products",
-						),
-						{
-							productId,
-							productTitle,
-							productPrice,
-							productBranch,
-							productSize,
-							productImage: downloadURL,
-							productQuantity,
-							productDetails,
-						},
-						{ merge: true, documentId: productId } // set the document ID to productId
-					);
-					setproductTitle("");
-					setproductPrice("");
-					setproductBranch("");
-					setproductSize("");
-					setProductQuantity("");
-					setproductDetails("");
-					setproductImage(null);
-					setShowModal(false);
-				});
-			}
+		  "state_changed",
+		  (snapshot) => {
+			const progress = Math.round(
+			  (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+			);
+			setProgresspercent(progress);
+		  },
+		  (error) => {
+			alert(error);
+		  },
+		  () => {
+			getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+			  addDoc(
+				collection(
+				  db,
+				  "users",
+				  "qIglLalZbFgIOnO0r3Zu",
+				  "basic_users",
+				  userId,
+				  "products"
+				),
+				{
+				  userId,
+				  barcodeId,
+				  barcodeUrl,
+				  qrcodeUrl,
+				  productId,
+				  productTitle,
+				  productPrice: parseInt(productPrice),
+				  branch,
+				  productSize: parseInt(productSize),
+				  productImage: downloadURL,
+				  productQuantity: parseInt(productQuantity),
+				  productDetails,
+				  createtime: serverTimestamp(), // Add createtime field with current server timestamp
+				  updatetime: serverTimestamp() // Add updatetime field with current server timestamp
+				},
+				{ merge: true, documentId: productId } // set the document ID to productId
+			  );
+			  setproductTitle("");
+			  setproductPrice("");
+			  setBranch("");
+			  setproductSize("");
+			  setProductQuantity("");
+			  setproductDetails("");
+			  setproductImage("");
+			  setShowModal(false);
+			});
+		  }
 		);
-	}
-	
-
+	  }
+	  
 
 	return (
 		<div className="AddProduct">
@@ -135,8 +142,8 @@ function AddProduct() {
 					setproductQuantity={setProductQuantity}
 					productDetails={productDetails}
 					setproductDetails={setproductDetails}
-					productBranch={productBranch}
-					setproductBranch={setproductBranch}
+					productBranch={branch}
+					setproductBranch={setBranch}
 					productImage={setproductImage}
 					setproductImage={setproductImage}
 					generateBarcodeButton={true}
