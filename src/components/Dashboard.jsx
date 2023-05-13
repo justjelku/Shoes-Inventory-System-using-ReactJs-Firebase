@@ -14,6 +14,8 @@ import {
 const DashboardContainers = () => {
   const [totalQuantities, setTotalQuantities] = useState(null);
   const [totalPrice, setTotalPrice] = useState(null);
+  const [productOut, setProductOut] = useState(null);
+  const [productIn, setProductIn] = useState(null);
   const [products, setProducts] = useState([]);
   const [userId, setUserId] = useState(null);
 
@@ -89,6 +91,53 @@ const DashboardContainers = () => {
       getTotalPrice();
     }
   }, [userId]); 
+
+  useEffect(() => {
+    const getTotalProductOut = async () => {
+      const querySnapshot = await getDocs(collection(db, 'users', 'qIglLalZbFgIOnO0r3Zu', 'basic_users', userId, 'products'));
+      let total = 0;
+      let zeroQtyCount = 0;
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if (data.productQuantity) {
+          total += parseInt(data.productQuantity);
+        } else {
+          zeroQtyCount++;
+        }
+      });
+      console.log(`Total quantities: ${total}`);
+      console.log(`Total products with quantity of zero: ${zeroQtyCount}`);
+      setProductOut(zeroQtyCount);
+    };
+    
+    if (userId) {
+      getTotalProductOut();
+    }
+  }, [userId]);
+
+  useEffect(() => {
+    const getTotalProductIn = async () => {
+      const querySnapshot = await getDocs(collection(db, 'users', 'qIglLalZbFgIOnO0r3Zu', 'basic_users', userId, 'products'));
+      let total = 0;
+      let nonZeroQtyCount = 0;
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if (data.productQuantity && parseInt(data.productQuantity) > 0) {
+          total += parseInt(data.productQuantity);
+          nonZeroQtyCount++;
+        }
+      });
+      console.log(`Total quantities: ${total}`);
+      console.log(`Total products with quantity greater than zero: ${nonZeroQtyCount}`);
+      setProductIn(nonZeroQtyCount);
+    };
+    
+    if (userId) {
+      getTotalProductIn();
+    }
+  }, [userId]);
+  
+  
   
 
   return (
@@ -110,8 +159,8 @@ const DashboardContainers = () => {
             <BsClock />
           </div>
           <div className="dashboard__text">
-            <h3 className="dashboard__title">Pending Order</h3>
-            <p className="dashboard__value">0</p>
+            <h3 className="dashboard__title">Product In</h3>
+            <p className="dashboard__value">{productIn}</p>
           </div>
         </div>
       </div>
@@ -121,7 +170,7 @@ const DashboardContainers = () => {
             <BsClipboardData />
           </div>
           <div className="dashboard__text">
-            <h3 className="dashboard__title">Stock Available</h3>
+            <h3 className="dashboard__title">Total Products</h3>
             <p className="dashboard__value">
             {totalQuantities}
             </p>
@@ -134,8 +183,8 @@ const DashboardContainers = () => {
             <BsCart />
           </div>
           <div className="dashboard__text">
-            <h3 className="dashboard__title">Total Order</h3>
-            <p className="dashboard__value">0</p>
+            <h3 className="dashboard__title">Product Out</h3>
+            <p className="dashboard__value">{productOut}</p>
           </div>
         </div>
       </div>
