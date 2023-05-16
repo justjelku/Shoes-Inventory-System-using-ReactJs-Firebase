@@ -91,9 +91,6 @@ function ProductForm({
 					onChange={handleImageChange}
 				/>
 			</div>
-			<div className="generateBarcode" onClick={() => generateBarcodeButton(false)}>
-				<button>Generate Barcode</button>
-			</div>
 			{
 				showButtons &&
 				<div>
@@ -109,4 +106,4 @@ function ProductForm({
 	)
 }
 
-export default ProductForm
+export default ProductFormw
