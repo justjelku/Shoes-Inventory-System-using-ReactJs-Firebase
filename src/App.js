@@ -30,25 +30,6 @@ export default function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              exact
-              path="/manageuser"
-              element={
-                <ProtectedRoute>
-                  <ManageUsers />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              exact
-              path="/add"
-              element={<AddEditUser />}
-            />
-            <Route
-              exact
-              path="/update/:id"
-              element={<AddEditUser />}
-            />
           </Routes>
         </BrowserRouter>
       </AdminAuthProvider>
@@ -74,6 +55,25 @@ export default function App() {
                   <Profile />
                 </ProtectedRoute>
               }
+            />
+            <Route
+              exact
+              path="/manageuser"
+              element={
+                <ProtectedRoute>
+                  <ManageUsers />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/add"
+              element={<AddEditUser />}
+            />
+            <Route
+              exact
+              path="/update/:id"
+              element={<AddEditUser />}
             />
           </Routes>
         </BrowserRouter>

@@ -20,10 +20,10 @@ function AddProduct() {
 	const [barcodeUrl, setBarcodeUrl] = useState('')
 	const [showModal, setShowModal] = useState(false)
 	const [productTitle, setproductTitle] = useState('')
-	const [productSize, setproductSize] = useState(0)
-	const [productPrice, setproductPrice] = useState(0)
+	const [productSize, setproductSize] = useState('')
+	const [productPrice, setproductPrice] = useState('')
 	const [productDetails, setproductDetails] = useState('')
-	const [productQuantity, setProductQuantity] = useState(0)
+	const [productQuantity, setProductQuantity] = useState('')
 	const [branch, setBranch] = useState('')
 	const [productImage, setproductImage] = useState('')
 	const [progresspercent, setProgresspercent] = useState(0);
@@ -42,7 +42,7 @@ function AddProduct() {
 
 	  function getLastProductId(userId) {
 		const random = Math.floor(Math.random() * 99999);
-		const userPrefix = userId.substring(0, 3);
+		const userPrefix = userId.substring(0, 8);
 		const productId = `2023${userPrefix}${random.toString().padStart(5, '0')}`;
 		return productId;
 	  }
@@ -87,7 +87,8 @@ function AddProduct() {
 				  "qIglLalZbFgIOnO0r3Zu",
 				  "basic_users",
 				  userId,
-				  "products"
+				  "products",
+				  productId
 				),
 				{
 				  userId,
@@ -102,8 +103,8 @@ function AddProduct() {
 				  productImage: downloadURL,
 				  productQuantity: parseInt(productQuantity),
 				  productDetails,
-				  createtime: serverTimestamp(), // Add createtime field with current server timestamp
-				  updatetime: serverTimestamp() // Add updatetime field with current server timestamp
+				  createdtime: serverTimestamp(), // Add createtime field with current server timestamp
+				  updatedtime: serverTimestamp() // Add updatetime field with current server timestamp
 				},
 				{ merge: true, documentId: productId } // set the document ID to productId
 			  );

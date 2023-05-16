@@ -244,14 +244,16 @@ body {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   display: flex;
+  justify-content: center;
+  text-align: center;
   flex-direction: column;
   padding: 1rem 1rem calc(1rem + 40px) 1rem;
   position: relative;
   width: 100%;
   .cancel {
 	position: absolute;
-	top: 80px;
-	right: 10px;
+	top: 60px;
+	right: 20px;
 	cursor: pointer;
 	svg {
 	  fill: white;
@@ -272,6 +274,7 @@ body {
     }
     
     input {
+		margin-left: 50%;
       background-color: #f5f5f5;
       border: none;
       border-radius: 4px;
@@ -294,6 +297,7 @@ body {
   .productQuantity,
   .productBranch {
     margin-bottom: 15px;
+	margin-right: 25px;
     
     input {
       background-color: #f5f5f5;
@@ -642,3 +646,57 @@ body {
 		// padding-right: 1rem;
 	}
 }
+
+//Modal
+.ImageModal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 99;
+
+	h1 {
+		position: absolute;
+		top: 5%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+
+.ImageModal .img_container {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.30);
+	top: 25%;
+	bottom: -100px;
+	left: 50%;
+	transform: translate(-50%, -25%);
+	padding: 0 20px;
+}
+
+// Styling for the new button container
+.options-container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-right: 20px;
+	}
+	
+	.options-container button {
+	margin-left: 10px;
+	padding: 10px;
+	background-color: white;
+	color: black;
+	border: 1px solid black;
+	cursor: pointer;
+	}
+	
+	.options-container button:hover {
+	background-color: black;
+	color: white;
+	}

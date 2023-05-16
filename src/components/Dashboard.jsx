@@ -75,12 +75,14 @@ const DashboardContainers = () => {
 
   useEffect(() => {
     const getTotalPrice = async () => {
-      const querySnapshot = await getDocs(collection(db, 'users', 'qIglLalZbFgIOnO0r3Zu', 'basic_users', userId, 'products'));
+      const querySnapshot = await getDocs(collection(db, 'users', 'qIglLalZbFgIOnO0r3Zu', 'basic_users', userId, 'sold_products'));
       let total = 0;
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        if (data.productPrice) {
-          total += parseInt(data.productPrice);
+        if (data.productPrice && data.productQuantity) {
+          const price = parseInt(data.productPrice);
+          const quantity = parseInt(data.productQuantity);
+          total += price * quantity;
         }
       });
       console.log(`Total price: ${total}`);
@@ -90,11 +92,12 @@ const DashboardContainers = () => {
     if (userId) {
       getTotalPrice();
     }
-  }, [userId]); 
+  }, [userId]);
+  
 
   useEffect(() => {
     const getTotalProductOut = async () => {
-      const querySnapshot = await getDocs(collection(db, 'users', 'qIglLalZbFgIOnO0r3Zu', 'basic_users', userId, 'products'));
+      const querySnapshot = await getDocs(collection(db, 'users', 'qIglLalZbFgIOnO0r3Zu', 'basic_users', userId, 'sold_products'));
       let total = 0;
       let zeroQtyCount = 0;
       querySnapshot.forEach((doc) => {
@@ -107,7 +110,7 @@ const DashboardContainers = () => {
       });
       console.log(`Total quantities: ${total}`);
       console.log(`Total products with quantity of zero: ${zeroQtyCount}`);
-      setProductOut(zeroQtyCount);
+      setProductOut(total);
     };
     
     if (userId) {
@@ -129,7 +132,7 @@ const DashboardContainers = () => {
       });
       console.log(`Total quantities: ${total}`);
       console.log(`Total products with quantity greater than zero: ${nonZeroQtyCount}`);
-      setProductIn(nonZeroQtyCount);
+      setProductIn(total);
     };
     
     if (userId) {
@@ -149,7 +152,7 @@ const DashboardContainers = () => {
           </div>
           <div className="dashboard__text">
             <h3 className="dashboard__title">Total Sales</h3>
-            <p className="dashboard__value">{totalPrice}</p>
+            <p className="dashboard__value">₱{totalPrice}.00</p>
           </div>
         </div>
       </div>
@@ -167,24 +170,24 @@ const DashboardContainers = () => {
       <div className="dashboard__item">
         <div className="dashboard__container">
           <div className="dashboard__icon">
-            <BsClipboardData />
+            <BsCart />
           </div>
           <div className="dashboard__text">
-            <h3 className="dashboard__title">Total Products</h3>
-            <p className="dashboard__value">
-            {totalQuantities}
-            </p>
+            <h3 className="dashboard__title">Product Out</h3>
+            <p className="dashboard__value">{productOut}</p>
           </div>
         </div>
       </div>
       <div className="dashboard__item">
         <div className="dashboard__container">
           <div className="dashboard__icon">
-            <BsCart />
+            <BsClipboardData />
           </div>
           <div className="dashboard__text">
-            <h3 className="dashboard__title">Product Out</h3>
-            <p className="dashboard__value">{productOut}</p>
+            <h3 className="dashboard__title">Total Products</h3>
+            <p className="dashboard__value">
+            {productIn+productOut}
+            </p>
           </div>
         </div>
       </div>

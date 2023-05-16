@@ -8,7 +8,7 @@ function Navbar() {
       <nav className="navbar">
         <Link to="/" className="logo">Shoes Inventory Management System</Link>
         <ul className="links" style={{ marginLeft: 'auto' }}>
-          <li><Link to="/dashboard" class="active">Dashboard</Link></li>
+          <li><Link to="/" class="active">Dashboard</Link></li>
           <li><Link to="/manageuser" className="link">Manage Users</Link></li>
           <li><Link to="/sales" className="link">Sales</Link></li>
           <li><Link to="/account" className="link">Profile</Link></li>

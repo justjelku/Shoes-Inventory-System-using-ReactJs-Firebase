@@ -3,20 +3,27 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { db } from '../firebase';
+import { Modal } from '../components/ImageModal'
 import {
   query,
   collection,
   onSnapshot,
 } from 'firebase/firestore';
 
-// const style = {
-//   productImage: 'w-10 h-10'
-// };
-
 export const ContainerTables = () => {
   const [products, setProducts] = useState([]);
   const [userId, setUserId] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClick = (product) => {
+    setSelectedProduct(product);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
 
   useEffect(() => {
@@ -54,11 +61,12 @@ export const ContainerTables = () => {
     }
   }, [setProducts, userId]);
 
-  const handleRowClick = (product) => {
-    setSelectedProduct(product);
-  };
+  // const handleRowClick = (product) => {
+  //   setSelectedProduct(product);
+  // };
 
   return (
+    <>
     <table className="table">
       <thead>
         <tr>
@@ -72,42 +80,22 @@ export const ContainerTables = () => {
       </thead>
       <tbody>
         {products.map((product) => (
-          <tr key={product.id} onClick={() => handleRowClick(product)}>
+          <tr key={product.id} onClick={() => handleClick(product)}>
             <td data-label="Product ID">{product.id}</td>
             <td data-label="Name">{product.productTitle}</td>
             <td data-label="Size">{product.productSize}</td>
             <td data-label="Price">{product.productPrice}</td>
             <td data-label="Quantity">{product.productQuantity}</td>
-            <td data-label="Image"><img src={product.productImage} style={{height:'100px', width: '100px'}} alt={product.productTitle}/></td>
+            <td data-label="Image"><img src={product.barcodeUrl} style={{height:'100px', width: '100px',  backgroundColor: 'white' }} alt={product.productTitle}/></td>
           </tr>
         ))}
       </tbody>
     </table>
+    {selectedProduct && (
+        <Modal showModal={showModal} setShowModal={setShowModal}>
+          <img src={selectedProduct.barcodeUrl} style={{maxWidth: '100%', backgroundColor: 'white'}} alt={selectedProduct.productTitle} />
+        </Modal>
+    )}
+  </>
   );
 };
-
- // useEffect(() => {
-  //   if (userId) {
-  //     const getProduct = query(
-  //       collection(
-  //         db,
-  //         'users',
-  //         'qIglLalZbFgIOnO0r3Zu',
-  //         'basic_users',
-  //         userId,
-  //         'products',
-  //         product.productId,
-  //         'productImages'
-  //       )
-  //     );
-  //     const unsubscribe = onSnapshot(getProduct, (querySnapshot) => {
-  //       let productsArr = [];
-  //       querySnapshot.forEach((doc) => {
-  //         productsArr.push({ id: doc.id, ...doc.data() }); // Include all fields in the object
-  //       });
-  //       setProducts(productsArr);
-  //     });
-  //     return () => unsubscribe();
-  //   }
-  // }, [setProducts, userId]);
-  
