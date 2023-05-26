@@ -730,6 +730,24 @@ body {
 	// flex-wrap: wrap;
 	/* Wrap the images to a new line if there is not enough space */
 
+	.edit {
+		position: absolute;
+		top: 20px;
+		right: 40px;
+		size: 100px;
+		cursor: pointer;
+
+		svg {
+			fill: rgb(0, 0, 0);
+		}
+
+		.card-edit{
+			top: 20px;
+			size: 100px;
+			color: #000;
+		}
+	}
+
 	.images {
 		justify-content: center;
 		display: flex;

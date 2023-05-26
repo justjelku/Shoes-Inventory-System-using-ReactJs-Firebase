@@ -160,23 +160,38 @@ export const ContainerTables = () => {
       </table>
       {routing}
       {selectedProduct && (
-        <Modal showModal={showModal} setShowModal={setShowModal}>
-          <DisplayProduct 
-          productTitle={selectedProduct.productTitle}
-          productSize={selectedProduct.productSize} 
-          productPrice={selectedProduct.productPrice} 
-          productQuantity={selectedProduct.productQuantity}
-          productBranch={selectedProduct.productBranch} 
-          productImage={selectedProduct.productImage}  
-          productDetails={selectedProduct.productDetails}  
-          barcodeUrl={selectedProduct.barcodeUrl}  
-          sizeSystem={selectedProduct.sizeSystem}  
-          qrcodeUrl={selectedProduct.qrcodeUrl}
-          category={selectedProduct.category}  
-          color={selectedProduct.color}
-          />
-        </Modal>
-      )}
+  <Modal showModal={showModal} setShowModal={setShowModal}>
+    <EditProduct
+      productTitle={selectedProduct.productTitle}
+      productSize={selectedProduct.productSize}
+      productPrice={selectedProduct.productPrice}
+      productQuantity={selectedProduct.productQuantity}
+      productBranch={selectedProduct.productBranch}
+      productImage={selectedProduct.productImage}
+      productDetails={selectedProduct.productDetails}
+      barcodeUrl={selectedProduct.barcodeUrl}
+      sizeSystem={selectedProduct.sizeSystem}
+      qrcodeUrl={selectedProduct.qrcodeUrl}
+      category={selectedProduct.category}
+      color={selectedProduct.color}
+    />
+    <DisplayProduct
+      productTitle={selectedProduct.productTitle}
+      productSize={selectedProduct.productSize}
+      productPrice={selectedProduct.productPrice}
+      productQuantity={selectedProduct.productQuantity}
+      productBranch={selectedProduct.productBranch}
+      productImage={selectedProduct.productImage}
+      productDetails={selectedProduct.productDetails}
+      barcodeUrl={selectedProduct.barcodeUrl}
+      sizeSystem={selectedProduct.sizeSystem}
+      qrcodeUrl={selectedProduct.qrcodeUrl}
+      category={selectedProduct.category}
+      color={selectedProduct.color}
+    />
+  </Modal>
+)}
+
     </>
   );
 };
