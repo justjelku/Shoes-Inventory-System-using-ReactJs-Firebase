@@ -13,7 +13,7 @@ import {
 
 const DashboardContainers = () => {
   const [totalQuantities, setTotalQuantities] = useState(null);
-  const [totalPrice, setTotalPrice] = useState(null);
+  const [stockIn, setStockIn] = useState(null);
   const [productOut, setProductOut] = useState(null);
   const [productIn, setProductIn] = useState(null);
   const [products, setProducts] = useState([]);
@@ -73,31 +73,33 @@ const DashboardContainers = () => {
     }
   }, [userId]); 
 
+
   useEffect(() => {
-    const getTotalPrice = async () => {
-      const querySnapshot = await getDocs(collection(db, 'users', 'qIglLalZbFgIOnO0r3Zu', 'basic_users', userId, 'sold_products'));
+    const getTotalStockIn = async () => {
+      const querySnapshot = await getDocs(collection(db, 'users', 'qIglLalZbFgIOnO0r3Zu', 'basic_users', userId, 'stock_in'));
       let total = 0;
+      let zeroQtyCount = 0;
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        if (data.productPrice && data.productQuantity) {
-          const price = parseInt(data.productPrice);
-          const quantity = parseInt(data.productQuantity);
-          total += price * quantity;
+        if (data.productQuantity) {
+          total += parseInt(data.productQuantity);
+        } else {
+          zeroQtyCount++;
         }
       });
-      console.log(`Total price: ${total}`);
-      setTotalPrice(total);
+      console.log(`Total quantities: ${total}`);
+      console.log(`Total products with quantity of zero: ${zeroQtyCount}`);
+      setStockIn(total);
     };
     
     if (userId) {
-      getTotalPrice();
+      getTotalStockIn();
     }
   }, [userId]);
-  
 
   useEffect(() => {
     const getTotalProductOut = async () => {
-      const querySnapshot = await getDocs(collection(db, 'users', 'qIglLalZbFgIOnO0r3Zu', 'basic_users', userId, 'sold_products'));
+      const querySnapshot = await getDocs(collection(db, 'users', 'qIglLalZbFgIOnO0r3Zu', 'basic_users', userId, 'stock_out'));
       let total = 0;
       let zeroQtyCount = 0;
       querySnapshot.forEach((doc) => {
@@ -148,17 +150,6 @@ const DashboardContainers = () => {
       <div className="dashboard__item">
         <div className="dashboard__container">
           <div className="dashboard__icon">
-            <BsGraphUp />
-          </div>
-          <div className="dashboard__text">
-            <h3 className="dashboard__title">Total Sales</h3>
-            <p className="dashboard__value">₱{totalPrice}.00</p>
-          </div>
-        </div>
-      </div>
-      <div className="dashboard__item">
-        <div className="dashboard__container">
-          <div className="dashboard__icon">
             <BsClock />
           </div>
           <div className="dashboard__text">
@@ -170,10 +161,21 @@ const DashboardContainers = () => {
       <div className="dashboard__item">
         <div className="dashboard__container">
           <div className="dashboard__icon">
+            <BsGraphUp />
+          </div>
+          <div className="dashboard__text">
+            <h3 className="dashboard__title">Stock In</h3>
+            <p className="dashboard__value">{stockIn}</p>
+          </div>
+        </div>
+      </div>
+      <div className="dashboard__item">
+        <div className="dashboard__container">
+          <div className="dashboard__icon">
             <BsCart />
           </div>
           <div className="dashboard__text">
-            <h3 className="dashboard__title">Product Out</h3>
+            <h3 className="dashboard__title">Stock Out</h3>
             <p className="dashboard__value">{productOut}</p>
           </div>
         </div>

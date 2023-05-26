@@ -2,23 +2,21 @@ import React from 'react'
 import { UserTables } from './UserTable'
 import Navbar from './NavBar';
 import { ContainerTables } from './Tables';
-import DashboardContainers from './Dashboard';
+import Profile from './Profile';
 import Main from './Main';
 import AddProduct from './Addproduct';
 import {StockHistoryTable} from './StockHistoryTable'
 
-function ManageUsers() {
+function ProfilePage() {
   return (
     <div>
       <Navbar>
-        <AddProduct />
       </Navbar>
       <Main>
-        <DashboardContainers />
-        <StockHistoryTable />
+        <Profile />
       </Main>
     </div>
   )
 }
 
-export default ManageUsers
+export default ProfilePage

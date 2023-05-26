@@ -1,6 +1,6 @@
 import Login from './components/Login';
 import Register from './components/Register';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Switch, Link } from 'react-router-dom';
 import React from 'react';
 import './App.scss';
 import AdminLogin from './components/AdminLogin';
@@ -13,6 +13,9 @@ import Home from './components/Home';
 import AdminProfile from './components/AdminProfile';
 import ManageUsers from './components/ManageUsers';
 import AddEditUser from './components/AddEditUser';
+import ProfilePage from './components/ProfilePage';
+import EditProduct from './components/EditProduct';
+import EditPage from './components/EditPage';
 
 export default function App() {
   return (
@@ -49,16 +52,25 @@ export default function App() {
             />
             <Route
               exact
-              path="/account"
+              path="/edit/:productId"
               element={
                 <ProtectedRoute>
-                  <Profile />
+                  <EditPage />
                 </ProtectedRoute>
               }
             />
             <Route
               exact
-              path="/manageuser"
+              path="/account"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/stockhistory"
               element={
                 <ProtectedRoute>
                   <ManageUsers />

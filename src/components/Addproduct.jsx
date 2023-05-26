@@ -126,7 +126,7 @@ function AddProduct() {
 		<div className="AddProduct">
 			<div className="btn">
 				<Button onClick={() => setShowModal(true)}>
-					New Product
+					Add Product
 				</Button>
 			</div>
 			<Modal showModal={showModal} setShowModal={setShowModal}>

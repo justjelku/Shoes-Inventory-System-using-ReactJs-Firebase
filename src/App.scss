@@ -4,7 +4,7 @@
 
 $primary-color: #007bff;
 $secondary-color: #6c757d;
-$bg-color: #212121;
+$bg-color: #111111;
 $bg-opacity: 0.8;
 $color-primary: rgb(255, 255, 255);
 
@@ -241,164 +241,166 @@ body {
 //ProductForm
 
 .ProductForm {
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  flex-direction: column;
-  padding: 1rem 1rem calc(1rem + 40px) 1rem;
-  position: relative;
-  width: 100%;
-  .cancel {
-	position: absolute;
-	top: 60px;
-	right: 20px;
-	cursor: pointer;
-	svg {
-	  fill: white;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	flex-direction: column;
+	padding: 1rem 1rem calc(1rem + 40px) 1rem;
+	position: relative;
+	width: 100%;
+
+	.cancel {
+		position: absolute;
+		top: 5px;
+		right: 20px;
+		cursor: pointer;
+
+		svg {
+			fill: white;
+		}
 	}
-  }
-  
-  
-  .heading {
-	margin-top: 50px;
-    
-    h3 {
-		position: relative;
-      color: white;
-      font-size: 20px;
-      font-weight: 500;
-      margin-bottom: 50px;
-	  text-align: center;
-    }
-    
-    input {
-		margin-left: 50%;
-      background-color: #f5f5f5;
-      border: none;
-      border-radius: 4px;
-      box-shadow: none;
-      color: #333;
-      font-size: 16px;
-      padding: 10px;
-      width: 100%;
-      
-      &:focus {
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-        outline: none;
-      }
-    }
-  }
-  
-  .productSize,
-  .productPrice,
-  .productDetails,
-  .productQuantity,
-  .productBranch {
-    margin-bottom: 15px;
-	margin-right: 25px;
-    
-    input {
-      background-color: #f5f5f5;
-      border: none;
-      border-radius: 4px;
-      box-shadow: none;
-      color: #333;
-      font-size: 16px;
-      padding: 0;
-      width: 100%;
-      
-      &:focus {
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-        outline: none;
-      }
-    }
-  }
-  
-  .productImage {
-    margin-bottom: 15px;
-	margin-left: 50px;
-    
-    input[type="file"] {
-      display: flex;
-    }
-    
-    label {
-      background-color: #f5f5f5;
-      border: none;
-      border-radius: 10px;
-      box-shadow: none;
-      color: #ffffff;
-      cursor: pointer;
-      display: flex;
-      font-size: 16px;
-      padding: 10px;
-      
-      &:hover {
-        background-color: #ddd;
-      }
-    }
-    
-    span {
-      margin-left: 10px;
-    }
-  }
-  
-  .generateBarcode {
-    margin-bottom: 30px;
-    
-    button {
-      background-color: #f5f5f5;
-      border: none;
-      border-radius: 4px;
-      box-shadow: none;
-      color: #333;
-      cursor: pointer;
-      font-size: 16px;
-      padding: 10px;
-      
-      &:hover {
-        background-color: #ddd;
-      }
-    }
-  }
-  
-  .buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
-    
-    .cancel {
-      cursor: pointer;
-      
-      svg {
-        fill: #ffffff;
-        transition: fill 0.2s;
-        
-        &:hover {
-          fill: #ffffff;
-        }
-      }
-    }
-    
-    .confirm {
-      button {
-        background-color: #ffffff;
-        border: none;
-        border-radius: 4px;
-        box-shadow: none;
-        color: #ffffff;
-        cursor: pointer;
-        font-size: 16px;
-        padding: 10px;
-        
-        &:hover {
-          background-color: #ffffff;
-        }
-      }
-    }
-  }
+
+
+	.heading {
+		margin-top: 50px;
+
+		h3 {
+			position: relative;
+			color: white;
+			font-size: 20px;
+			font-weight: 500;
+			margin-bottom: 50px;
+			text-align: center;
+		}
+
+		input {
+			margin-left: 50%;
+			background-color: #f5f5f5;
+			border: none;
+			border-radius: 4px;
+			box-shadow: none;
+			color: #333;
+			font-size: 16px;
+			padding: 10px;
+			width: 100%;
+
+			&:focus {
+				box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+				outline: none;
+			}
+		}
+	}
+
+	.productSize,
+	.productPrice,
+	.productDetails,
+	.productQuantity,
+	.productBranch {
+		margin-bottom: 15px;
+		margin-right: 25px;
+
+		input {
+			background-color: #f5f5f5;
+			border: none;
+			border-radius: 4px;
+			box-shadow: none;
+			color: #333;
+			font-size: 16px;
+			padding: 0;
+			width: 100%;
+
+			&:focus {
+				box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+				outline: none;
+			}
+		}
+	}
+
+	.productImage {
+		margin-bottom: 15px;
+		margin-left: 50px;
+
+		input[type="file"] {
+			display: flex;
+		}
+
+		label {
+			background-color: #f5f5f5;
+			border: none;
+			border-radius: 10px;
+			box-shadow: none;
+			color: #ffffff;
+			cursor: pointer;
+			display: flex;
+			font-size: 16px;
+			padding: 10px;
+
+			&:hover {
+				background-color: #ddd;
+			}
+		}
+
+		span {
+			margin-left: 10px;
+		}
+	}
+
+	.generateBarcode {
+		margin-bottom: 30px;
+
+		button {
+			background-color: #f5f5f5;
+			border: none;
+			border-radius: 4px;
+			box-shadow: none;
+			color: #333;
+			cursor: pointer;
+			font-size: 16px;
+			padding: 10px;
+
+			&:hover {
+				background-color: #ddd;
+			}
+		}
+	}
+
+	.buttons {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 50px;
+
+		.cancel {
+			cursor: pointer;
+
+			svg {
+				fill: #ffffff;
+				transition: fill 0.2s;
+
+				&:hover {
+					fill: #ffffff;
+				}
+			}
+		}
+
+		.confirm {
+			button {
+				background-color: #ffffff;
+				border: none;
+				border-radius: 4px;
+				box-shadow: none;
+				color: #ffffff;
+				cursor: pointer;
+				font-size: 16px;
+				padding: 10px;
+
+				&:hover {
+					background-color: #ffffff;
+				}
+			}
+		}
+	}
 }
 
 
@@ -599,14 +601,16 @@ body {
 	text-align: center;
 	// align-items: left;
 	justify-self: center;
+	border-bottom: 2px solid #ffffff;
 
 	.table thead th {
 		text-align: center;
 		align-items: right;
 		padding: 10px;
-		// border-bottom: 2px solid #ef0000;
+		border-bottom: 2px solid #ffffff;
 		text-align: right; // added
 		margin-bottom: 50px;
+		margin-left: 50px;
 	}
 
 	.table tbody td {
@@ -614,7 +618,7 @@ body {
 		text-align: center;
 		align-items: center;
 		padding: 100px;
-		border-bottom: 1px solid #ffffff;
+		border-bottom: 2px solid #ffffff;
 	}
 
 	.table tbody td img {
@@ -630,6 +634,7 @@ body {
 	tbody tr:hover {
 		align-items: center;
 		justify-content: center;
+		border-bottom: 2px solid #ffffff;
 		background-color: rgb(72, 72, 72);
 		opacity: 0.5;
 		cursor: pointer;
@@ -647,30 +652,44 @@ body {
 	}
 }
 
-//Modal
 .ImageModal {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100vw;
+	width: 100%;
 	height: 100vh;
-	background: rgba(0, 0, 0, 0.8);
+	background: rgba(0, 0.10, 0, 0.8);
 	z-index: 99;
 
 	h1 {
+		color: #000;
 		position: absolute;
 		top: 5%;
-		left: 50%;
+		left: 20%;
 		transform: translate(-50%, -50%);
+		font-size: 15px;
+		/* Default font size for mobile */
+
+		@media (min-width: 768px) {
+			font-size: 20px;
+			/* Increase font size for tablets and larger screens */
+		}
+
+		@media (min-width: 1024px) {
+			font-size: 20px;
+			/* Increase font size for desktop screens */
+		}
 	}
 }
+
 
 .ImageModal .img_container {
 	position: absolute;
 	display: flex;
+	border-radius: 10%;
 	align-items: center;
 	justify-content: center;
-	background: rgba(255, 255, 255, 0.30);
+	background: rgba(255, 255, 255, 100);
 	top: 25%;
 	bottom: -100px;
 	left: 50%;
@@ -685,18 +704,149 @@ body {
 	margin-top: 20px;
 	margin-bottom: 10px;
 	margin-right: 20px;
-	}
-	
-	.options-container button {
+}
+
+.options-container button {
 	margin-left: 10px;
 	padding: 10px;
 	background-color: white;
 	color: black;
 	border: 1px solid black;
 	cursor: pointer;
-	}
-	
-	.options-container button:hover {
+}
+
+.options-container button:hover {
 	background-color: black;
 	color: white;
+}
+
+.StackedCard {
+	// display: flex;
+	// flex-direction: row;
+	// justify-content: center;
+	// /* Center items horizontally */
+	// align-items: center;
+	// /* Center items vertically */
+	// flex-wrap: wrap;
+	/* Wrap the images to a new line if there is not enough space */
+
+	.images {
+		justify-content: center;
+		display: flex;
+		/* Align items horizontally */
+		align-items: center;
+		/* Center items vertically */
+		margin-top: 25px;
+
+		
+		.stacked-card-image {
+			flex: 0 0 33%;
+			/* Each image takes up one-third of the available width */
+			max-width: 25%;
+			/* Ensure the images do not exceed their container */
+			margin: 10px;
+			/* Add some margin between the images */
+		}
 	}
+	
+	.barcode-qr-images {
+		justify-content: center;
+		display: flex;
+		/* Align items horizontally */
+		align-items: center;
+		/* Center items vertically */
+		margin-bottom: 1rem;
+
+		.stacked-card-qrcode,
+		.stacked-card-barcode {
+			flex: 0 0 33%;
+			/* Each image takes up one-third of the available width */
+			max-width: 25%;
+			/* Ensure the images do not exceed their container */
+			margin: 10px;
+			/* Add some margin between the images */
+		}
+	}
+
+	.card-heading {
+		// justify-content: center;
+		// display: flex;
+		// /* Align items horizontally */
+		// align-items: center;
+		// /* Center items vertically */
+		// margin-bottom: 1rem;
+
+		.card-title {
+			font-weight: bold;
+			font-size: 1.5rem;
+			color: #000000;
+			margin-bottom: 0.5rem;
+			text-align: center;
+		}
+		.card-subtitle {
+			color: #000000;
+			font-size: 12px;
+			margin-top: 0;
+			text-align: center;
+		}
+		.card-description {
+			color: #000000;
+			font-size: 1rem;
+			margin-bottom: 1rem;
+			text-align: justify;
+		}
+	}
+
+	.card-info {
+		justify-content: center;
+		display: flex;
+		/* Align items horizontally */
+		align-items: center;
+		/* Center items vertically */
+
+		.info-item {
+			display: inline-block;
+			background-color: #edf2f7;
+			border-radius: 9999px;
+			padding: 0.5rem 1rem;
+			font-size: 0.8rem;
+			font-weight: bold;
+			color: #4a5568;
+			margin-right: 0.5rem;
+			margin-bottom: 0.5rem;
+		}
+	}
+}
+
+
+.stacked-card-image {
+	display: inline-block;
+	max-width: 40%;
+	background-color: white;
+	margin-bottom: 10px;
+	margin-top: 50px;
+	margin-left: 30%;
+	justify-content: center;
+	align-items: center;
+}
+
+.stacked-card-barcode {
+	display: inline-block;
+	max-width: 25%;
+	background-color: white;
+	margin-bottom: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+.stacked-card-qrcode {
+	display: inline-block;
+	max-width: 25%;
+	background-color: white;
+	margin-bottom: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+
+// Add any additional styles or modifications as needed

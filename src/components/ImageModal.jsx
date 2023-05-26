@@ -13,7 +13,7 @@ export function Modal({children, showModal, setShowModal}){
         showModal &&
         <div className="ImageModal" ref={modalRef} onClick={closeModal}>
             <div className="img_container">
-				<h1>SCAN ME!</h1>
+				{/* <h1>Product Details</h1> */}
                 {children}
             </div>
         </div>

@@ -95,7 +95,7 @@ function ProductForm({
 				showButtons &&
 				<div>
 					<div className="cancel" onClick={() => setShowModal(false)}>
-						<X size='20' />
+						<X size='40' />
 					</div>
 					<div className="confirm">
 						<button>Submit</button>
@@ -106,4 +106,4 @@ function ProductForm({
 	)
 }
 
-export default ProductFormw
+export default ProductForm
