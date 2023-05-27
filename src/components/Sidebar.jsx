@@ -1,8 +1,16 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { ProductContext } from '../context/ProductContextProvider'
+import { ContainerTables } from './Tables';
 
 function Sidebar({ children }){
+    const [user, setUser] = useState(null);
+  const [photo, setPhoto] = useState(null);
 
-	// REF
+	// CONTEXT
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    // REF
     const sidebarRef = useRef()
 
 	useEffect(() => {
@@ -13,17 +21,21 @@ function Sidebar({ children }){
 
     const handleClick = e => {
         if(e.target === sidebarRef.current || sidebarRef.current.contains(e.target)){
-            setSelectedTodo(undefined)
+            setSelectedProduct( )
         }
     }
 
+    const handleToggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+      };
+
 	return ( 
-		<div
-            className='Sidebar'
-            ref={sidebarRef}
-        >
-            {children}
-        </div>
+		<div className={`Sidebar ${isSidebarOpen ? 'open' : ''}`} ref={sidebarRef}>
+      <div className="toggle-icon" onClick={handleToggleSidebar}>
+        <i className={`fas fa-bars ${isSidebarOpen ? 'open' : ''}`}></i>
+      </div>
+      {children}
+    </div>
 	 );
 }
  

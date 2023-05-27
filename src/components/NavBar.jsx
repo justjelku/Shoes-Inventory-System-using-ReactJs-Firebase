@@ -82,7 +82,6 @@ function Navbar() {
           <li><NavLink exact to="/" activeClassName="active">Dashboard</NavLink></li>
           <li><NavLink to="/stockhistory" activeClassName="active">Stock History</NavLink></li>
           <li><NavLink to="/account" activeClassName="active">Profile</NavLink></li>
-          <AddProduct />
         </ul>
       </nav>
     </div>

@@ -3,9 +3,9 @@ import { useProducts, updateProduct, deleteProduct } from '../hooks';
 
 const ProductContext = createContext();
 
-export function ProductContextProvider({ children }) {
-  const products = useProducts();
+function ProductContextProvider({ children }) {
   const [selectedProduct, setSelectedProduct] = useState(undefined)
+  const products = useProducts();
 
   return (
     <ProductContext.Provider  
@@ -22,4 +22,4 @@ export function ProductContextProvider({ children }) {
   );
 }
 
-export { ProductContext};
+export { ProductContextProvider, ProductContext};

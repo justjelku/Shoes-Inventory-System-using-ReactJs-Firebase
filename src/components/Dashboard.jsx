@@ -19,6 +19,9 @@ const DashboardContainers = () => {
   const [products, setProducts] = useState([]);
   const [userId, setUserId] = useState(null);
 
+  // STATE
+  const [showModal, setShowModal] = useState(false)
+
   useEffect(() => {
     const unsubscribeAuth = firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -146,7 +149,7 @@ const DashboardContainers = () => {
   
 
   return (
-    <div className="dashboard">
+    <div className="dashboard" onClick={ () => setShowModal(true)}>
       <div className="dashboard__item">
         <div className="dashboard__container">
           <div className="dashboard__icon">

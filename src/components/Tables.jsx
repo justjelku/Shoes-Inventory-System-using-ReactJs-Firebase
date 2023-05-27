@@ -14,17 +14,7 @@ import {
 import EditProduct from './EditProduct';
 import DisplayProduct from './DisplayProduct';
 import EditProductForm from './EditProductForm';
-
-const StockInTab = ({ product }) => {
-  // Render stock in content here
-  return <div>Stock In Tab Content</div>;
-};
-
-const StockOutTab = ({ product }) => {
-  // Render stock out content here
-  return <div>Stock Out Tab Content</div>;
-};
-
+import { ProductContext } from '../context/ProductContextProvider';
 
 
 export const ContainerTables = () => {
@@ -42,6 +32,8 @@ export const ContainerTables = () => {
   const [productBranch, setproductBranch] = useState()
   const [productImage, setproductImage] = useState()
   const [sizeSystem, setSizeSystem] = useState()
+
+  // const { products, selectedProduct } = useContext(ProductContext)
 
   const routes = [
     {
